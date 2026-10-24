@@ -17,6 +17,9 @@
   <!-- FontAwesome Icons CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
+  <!-- Favicon Oficial AppScout -->
+  <link rel="icon" type="image/png" href="img/logoappscout.png" />
+
   <!-- Estilos personalizados y utilidades de animaciones -->
   <link rel="stylesheet" href="style.css" />
 
@@ -118,8 +121,8 @@
       
       <!-- LOGO -->
       <a href="#" class="flex items-center space-x-3 group">
-        <div class="w-11 h-11 rounded-xl overflow-hidden shadow-lg group-hover:scale-105 transition-transform border border-emerald-500/40">
-          <img src="scout_logo.jpg" alt="Scout Wiki Logo" class="w-full h-full object-cover" />
+        <div class="w-11 h-11 rounded-xl overflow-hidden shadow-lg group-hover:scale-105 transition-transform border border-emerald-500/40 bg-emerald-950/50">
+          <img id="logoappscout" src="img/logoappscout.png" onerror="this.onerror=null; this.src='img/Logoapps.png';" alt="Logo AppScout" class="w-full h-full object-cover" />
         </div>
         <div class="flex flex-col">
           <span class="text-xl font-display font-extrabold tracking-wider text-white flex items-center gap-1.5">
@@ -333,7 +336,7 @@
       <!-- MOCKUP CONTAINER -->
       <div class="relative mx-auto max-w-[340px] sm:max-w-[400px] rounded-[48px] p-4 bg-gradient-to-b from-[#18361d] via-[#09150b] to-black border-4 border-[#254d2c] shadow-[0_0_80px_rgba(16,185,129,0.25)]">
         <div class="overflow-hidden rounded-[36px] border border-emerald-900/60 shadow-2xl relative bg-black">
-          <img src="scout_wiki_app_mockup.jpg" alt="Scout Wiki App Interfaz Nativa Android" class="w-full h-auto object-cover transform hover:scale-[1.02] transition-transform duration-500" />
+          <img src="img/scout_wiki_app_mockup.jpg" onerror="this.onerror=null; this.src='scout_wiki_app_mockup.jpg';" alt="Scout Wiki App Interfaz Nativa Android" class="w-full h-auto object-cover transform hover:scale-[1.02] transition-transform duration-500" />
         </div>
       </div>
 
@@ -916,9 +919,9 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-6">
       
       <div class="flex items-center space-x-3">
-        <svg class="w-5 h-5 text-emerald-500" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2L10 7C9 6 7 5 5 6C3.5 6.7 3 8.5 3.5 10C4.2 12 7 12.5 9.5 13C8.5 15.5 6 17 3 17C4.5 19 8 19.5 11 17.5L12 22L13 17.5C16 19.5 19.5 19 21 17C18 17 15.5 15.5 14.5 13C17 12.5 19.8 12 20.5 10C21 8.5 20.5 6.7 19 6C17 5 15 6 14 7L12 2Z"/>
-        </svg>
+        <div class="w-6 h-6 rounded-lg overflow-hidden border border-emerald-500/40 bg-emerald-950/50">
+          <img src="img/logoappscout.png" onerror="this.onerror=null; this.src='img/Logoapps.png';" alt="Logo AppScout" class="w-full h-full object-cover" />
+        </div>
         <span class="font-bold text-gray-300">Scout Wiki • Herramienta de Formación y Seguridad Scout</span>
       </div>
 
