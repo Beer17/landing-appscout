@@ -65,7 +65,7 @@ const MIME_TYPES = {
 const server = http.createServer((req, res) => {
   // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   // Preflight OPTIONS request
@@ -77,8 +77,9 @@ const server = http.createServer((req, res) => {
 
   // Parse URL safely
   let pathname = '/';
+  let parsedUrl;
   try {
-    const parsedUrl = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
+    parsedUrl = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
     pathname = decodeURIComponent(parsedUrl.pathname);
   } catch (err) {
     res.writeHead(400, { 'Content-Type': 'application/json; charset=UTF-8' });
@@ -89,9 +90,9 @@ const server = http.createServer((req, res) => {
   // POST /api/leads → Guardar lead en leads.json
   if (req.method === 'POST' && pathname === '/api/leads') {
     let body = '';
-    
-    req.on('data', chunk => { 
-      body += chunk.toString(); 
+
+    req.on('data', chunk => {
+      body += chunk.toString();
       // Protege contra payloads excesivos (> 1MB)
       if (body.length > 1e6) {
         req.destroy();
@@ -108,52 +109,69 @@ const server = http.createServer((req, res) => {
 
         const lead = JSON.parse(body);
 
-        // Validación básica
-        if (!lead || !lead.email || !lead.phone || !lead.role) {
+        const name = String(lead.name || 'Contacto Scout').trim();
+        const phone = String(lead.phone || '').trim();
+        const contactNumber = String(lead.contactNumber || lead.numContacto || lead.phone2 || '').trim();
+        const email = String(lead.email || '').trim().toLowerCase();
+        const role = String(lead.role || 'Scout / Dirigente').trim();
+
+        // Validación: Teléfono y Número de Contacto requeridos
+        if (!phone || !contactNumber) {
           res.writeHead(400, { 'Content-Type': 'application/json; charset=UTF-8' });
-          res.end(JSON.stringify({ success: false, error: 'Faltan campos obligatorios (email, phone, role).' }));
+          res.end(JSON.stringify({ 
+            success: false, 
+            error: 'Debes ingresar el número de teléfono principal y el número de contacto.' 
+          }));
           return;
         }
 
-        const email = String(lead.email).trim().toLowerCase();
-        const phone = String(lead.phone).trim();
-        const role = String(lead.role).trim();
-
-        // Validar formato de email
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-          res.writeHead(400, { 'Content-Type': 'application/json; charset=UTF-8' });
-          res.end(JSON.stringify({ success: false, error: 'El formato del correo electrónico no es válido.' }));
-          return;
+        // Si se provee correo, validar su formato
+        if (email) {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(email)) {
+            res.writeHead(400, { 'Content-Type': 'application/json; charset=UTF-8' });
+            res.end(JSON.stringify({ success: false, error: 'El formato del correo electrónico no es válido.' }));
+            return;
+          }
         }
 
         // Leer leads actuales de manera segura
         const leads = readLeads();
 
-        // Verificar si el lead ya existe para actualizarlo
-        const existingIndex = leads.findIndex(l => l.email === email);
+        // Verificar si el lead ya existe por teléfono o correo para actualizarlo
+        const existingIndex = leads.findIndex(l => 
+          (phone && l.phone === phone) || 
+          (email && l.email && l.email === email)
+        );
+
         if (existingIndex !== -1) {
+          leads[existingIndex].name = name;
           leads[existingIndex].phone = phone;
+          leads[existingIndex].contactNumber = contactNumber;
+          if (email) leads[existingIndex].email = email;
           leads[existingIndex].role = role;
           leads[existingIndex].updatedAt = new Date().toISOString();
           writeLeads(leads);
 
-          console.log(`🔄 Lead actualizado #${leads[existingIndex].id}: ${email} | ${phone} | ${role}`);
+          console.log(`🔄 Registro actualizado #${leads[existingIndex].id}: ${name} | Tel: ${phone} | Contacto: ${contactNumber} | ${role}`);
 
           res.writeHead(200, { 'Content-Type': 'application/json; charset=UTF-8' });
           res.end(JSON.stringify({ 
             success: true, 
-            message: '¡Tus datos ya estaban registrados y fueron actualizados exitosamente!', 
+            message: '¡Datos actualizados exitosamente en leads.json!', 
             lead: leads[existingIndex] 
           }));
           return;
         }
 
         // Agregar nuevo lead con fecha y hora
+        const nextId = leads.length > 0 ? Math.max(...leads.map(l => l.id || 0)) + 1 : 1;
         const newLead = {
-          id: leads.length + 1,
-          email,
+          id: nextId,
+          name,
           phone,
+          contactNumber,
+          email,
           role,
           registeredAt: new Date().toISOString()
         };
@@ -162,10 +180,10 @@ const server = http.createServer((req, res) => {
         // Guardar archivo actualizado
         writeLeads(leads);
 
-        console.log(`✅ Nuevo registro #${newLead.id}: ${newLead.email} | ${newLead.phone} | ${newLead.role}`);
+        console.log(`✅ Nuevo registro #${newLead.id}: ${name} | Tel: ${phone} | Contacto: ${contactNumber} | ${role}`);
 
         res.writeHead(200, { 'Content-Type': 'application/json; charset=UTF-8' });
-        res.end(JSON.stringify({ success: true, message: '¡Registro guardado exitosamente!', lead: newLead }));
+        res.end(JSON.stringify({ success: true, message: '¡Registro guardado exitosamente en leads.json!', lead: newLead }));
 
       } catch (err) {
         console.error('❌ Error al procesar lead:', err.message);
