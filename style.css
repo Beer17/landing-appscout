@@ -1,0 +1,87 @@
+/* Scout Wiki Landing Styles */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #000000;
+  color: #e2e8f0;
+  overflow-x: hidden;
+}
+
+.glow-green {
+  box-shadow: 0 0 35px rgba(16, 185, 129, 0.2);
+}
+
+.glow-green-lg {
+  box-shadow: 0 0 60px rgba(16, 185, 129, 0.35);
+}
+
+.glass-panel {
+  background: rgba(13, 22, 15, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(35, 66, 39, 0.6);
+}
+
+.glass-panel-hover:hover {
+  border-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.15);
+}
+
+/* Red Shift Night Mode for Campfire */
+body.campfire-mode {
+  background-color: #0d0000 !important;
+  color: #fca5a5 !important;
+}
+body.campfire-mode .glass-panel {
+  background: rgba(30, 10, 10, 0.85) !important;
+  border-color: rgba(153, 27, 27, 0.6) !important;
+}
+body.campfire-mode .text-emerald-400,
+body.campfire-mode .text-emerald-500,
+body.campfire-mode .text-green-500 {
+  color: #ef4444 !important;
+}
+body.campfire-mode .text-emerald-300,
+body.campfire-mode .chord-mark {
+  color: #f87171 !important;
+}
+body.campfire-mode .bg-emerald-500,
+body.campfire-mode .bg-emerald-600 {
+  background-color: #dc2626 !important;
+}
+
+/* Animated Grid Background Pattern */
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(27, 47, 31, 0.25) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(27, 47, 31, 0.25) 1px, transparent 1px);
+}
+
+/* Smooth Compass Rotate Animation */
+#compass-rose {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Modal animation */
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.animate-scaleUp {
+  animation: scaleUp 0.25s ease-out forwards;
+}
+
+/* SOS Flash beacon animation */
+@keyframes beaconPulse {
+  0%, 100% { opacity: 0.2; transform: scale(0.98); }
+  50% { opacity: 1; transform: scale(1.02); filter: drop-shadow(0 0 30px #ef4444); }
+}
+.animate-beacon {
+  animation: beaconPulse 0.4s infinite;
+}
