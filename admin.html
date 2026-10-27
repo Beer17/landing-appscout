@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Leads | Scout Wiki</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top, #102213, #000000);
+      color: #e2e8f0;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen">
+  <!-- Login Screen -->
+  <div id="loginScreen" class="min-h-screen flex items-center justify-center px-4">
+    <div class="w-full max-w-md bg-[#0f1711]/80 backdrop-blur-xl border border-[#234727] rounded-2xl shadow-[0_0_80px_rgba(16,185,129,0.15)] overflow-hidden">
+      <div class="p-8 text-center">
+        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-emerald-950/80 border border-emerald-500/40 flex items-center justify-center text-emerald-400 text-2xl">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <h1 class="text-2xl font-bold text-white mb-2">Panel de Leads Scout Wiki</h1>
+        <p class="text-sm text-gray-400 mb-6">Introduce la contraseña para acceder a la base de registros</p>
+        <form id="loginForm" class="space-y-4">
+          <input id="passwordInput" type="password" placeholder="Contraseña" autocomplete="current-password"
+            class="w-full bg-[#08100a] border border-[#213b24] text-white px-4 py-3 rounded-xl focus:outline-none focus:border-emerald-400 text-sm placeholder:text-gray-500 transition-colors">
+          <button class="w-full bg-gradient-to-r from-emerald-600 to-green-700 hover:from-emerald-500 hover:to-green-600 text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-2">
+            <i class="fa-solid fa-lock-open"></i>
+            <span>Acceder</span>
+          </button>
+          <p id="loginError" class="text-xs text-red-400 hidden"></p>
+        </form>
+      </div>
+      <div class="px-8 py-4 bg-black/40 text-center text-[11px] text-gray-500">
+        Protegido con contraseña. Usa la variable <code class="text-emerald-400">ADMIN_PASSWORD</code> en Vercel.
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div id="dashboard" class="hidden">
+    <header class="border-b border-[#1b2f1f] bg-black/80 backdrop-blur-xl sticky top-0 z-40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl overflow-hidden border border-emerald-500/40">
+            <img src="img/logoappscout.png" onerror="this.src='img/Logoapps.png'" class="w-full h-full object-cover">
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-white">Leads Scout Wiki</p>
+            <p class="text-[11px] text-gray-400">Total: <span id="totalCount">0</span></p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="btnRefresh" class="px-3 py-2 rounded-lg bg-[#122616] border border-[#254d2b] text-emerald-400 text-xs flex items-center gap-2 hover:bg-[#1c3a21]">
+            <i class="fa-solid fa-rotate"></i>
+            Actualizar
+          </button>
+          <button id="btnCsv" class="px-3 py-2 rounded-lg bg-[#122616] border border-[#254d2b] text-emerald-300 text-xs flex items-center gap-2 hover:bg-[#1c3a21]">
+            <i class="fa-solid fa-file-csv"></i>
+            Descargar CSV
+          </button>
+          <button id="btnJson" class="px-3 py-2 rounded-lg bg-[#122616] border border-[#254d2b] text-emerald-300 text-xs flex items-center gap-2 hover:bg-[#1c3a21]">
+            <i class="fa-solid fa-file-code"></i>
+            Descargar JSON
+          </button>
+          <button id="btnLogout" class="px-3 py-2 rounded-lg bg-red-950/60 border border-red-800/60 text-red-300 text-xs flex items-center gap-2 hover:bg-red-900/60">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Salir
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+      <div class="bg-[#0f1711]/80 border border-[#234727] rounded-2xl overflow-hidden shadow-[0_0_60px_rgba(16,185,129,0.1)]">
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm text-left">
+            <thead class="bg-[#0c180e] text-xs uppercase tracking-wider text-gray-400">
+              <tr>
+                <th class="px-6 py-3">ID</th>
+                <th class="px-6 py-3">Nombre</th>
+                <th class="px-6 py-3">Email</th>
+                <th class="px-6 py-3">Teléfono</th>
+                <th class="px-6 py-3">Contacto</th>
+                <th class="px-6 py-3">Rol</th>
+                <th class="px-6 py-3">Registrado</th>
+                <th class="px-6 py-3">Actualizado</th>
+              </tr>
+            </thead>
+            <tbody id="leadsTable" class="divide-y divide-[#1b311e]"></tbody>
+          </table>
+        </div>
+        <div id="emptyState" class="hidden text-center py-12 text-gray-500">
+          <i class="fa-solid fa-inbox text-3xl mb-3"></i>
+          <p class="text-sm">Aún no hay leads registrados</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const loginScreen = document.getElementById('loginScreen');
+    const dashboard = document.getElementById('dashboard');
+    const loginForm = document.getElementById('loginForm');
+    const passwordInput = document.getElementById('passwordInput');
+    const loginError = document.getElementById('loginError');
+    const leadsTable = document.getElementById('leadsTable');
+    const totalCount = document.getElementById('totalCount');
+    const emptyState = document.getElementById('emptyState');
+    const btnRefresh = document.getElementById('btnRefresh');
+    const btnCsv = document.getElementById('btnCsv');
+    const btnJson = document.getElementById('btnJson');
+    const btnLogout = document.getElementById('btnLogout');
+
+    let adminPass = sessionStorage.getItem('scoutwiki_admin_pass') || '';
+    let leadsData = [];
+
+    if (adminPass) {
+      showDashboard();
+      fetchLeads();
+    }
+
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const pass = passwordInput.value.trim();
+      if (!pass) {
+        showError('Introduce una contraseña');
+        return;
+      }
+      adminPass = pass;
+      try {
+        const res = await fetch('/api/admin', {
+          method: 'GET',
+          headers: { 'x-admin-pass': adminPass }
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          sessionStorage.setItem('scoutwiki_admin_pass', adminPass);
+          passwordInput.value = '';
+          showDashboard();
+          renderLeads(data.leads);
+        } else {
+          showError(data.error || 'Contraseña incorrecta');
+        }
+      } catch (err) {
+        showError('Error al conectar con el servidor');
+      }
+    });
+
+    btnRefresh.addEventListener('click', fetchLeads);
+    btnLogout.addEventListener('click', () => {
+      sessionStorage.removeItem('scoutwiki_admin_pass');
+      adminPass = '';
+      dashboard.classList.add('hidden');
+      loginScreen.classList.remove('hidden');
+    });
+
+    btnJson.addEventListener('click', () => {
+      if (!leadsData.length) return alert('No hay datos para descargar');
+      const blob = new Blob([JSON.stringify(leadsData, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `scout-wiki-leads-${Date.now()}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    btnCsv.addEventListener('click', () => {
+      if (!leadsData.length) return alert('No hay datos para descargar');
+      const headers = ['id','name','email','phone','contactNumber','role','registeredAt','updatedAt'];
+      const rows = [headers.join(',')];
+      leadsData.forEach(l => {
+        const values = headers.map(h => {
+          const val = l[h] !== undefined && l[h] !== null ? String(l[h]) : '';
+          return '"' + val.replace(/"/g, '""') + '"';
+        });
+        rows.push(values.join(','));
+      });
+      const blob = new Blob([rows.join('\n')], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `scout-wiki-leads-${Date.now()}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    async function fetchLeads() {
+      btnRefresh.disabled = true;
+      btnRefresh.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Actualizando';
+      try {
+        const res = await fetch('/api/admin', {
+          method: 'GET',
+          headers: { 'x-admin-pass': adminPass }
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          renderLeads(data.leads);
+        } else if (res.status === 401) {
+          btnLogout.click();
+        } else {
+          alert(data.error || 'Error al cargar leads');
+        }
+      } catch (err) {
+        alert('Error de conexión');
+      } finally {
+        btnRefresh.disabled = false;
+        btnRefresh.innerHTML = '<i class="fa-solid fa-rotate"></i> Actualizar';
+      }
+    }
+
+    function renderLeads(leads = []) {
+      leadsData = leads;
+      totalCount.textContent = leads.length;
+      leadsTable.innerHTML = '';
+      if (!leads.length) {
+        emptyState.classList.remove('hidden');
+        return;
+      }
+      emptyState.classList.add('hidden');
+      leads.slice().reverse().forEach(l => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-emerald-950/10 transition-colors';
+        tr.innerHTML = `
+          <td class="px-6 py-4 text-gray-400">${l.id || '-'}</td>
+          <td class="px-6 py-4 text-white">${escapeHtml(l.name || '-')}</td>
+          <td class="px-6 py-4 text-emerald-300">${escapeHtml(l.email || '-')}</td>
+          <td class="px-6 py-4 text-gray-300">${escapeHtml(l.phone || '-')}</td>
+          <td class="px-6 py-4 text-gray-300">${escapeHtml(l.contactNumber || '-')}</td>
+          <td class="px-6 py-4 text-gray-300">${escapeHtml(l.role || '-')}</td>
+          <td class="px-6 py-4 text-xs text-gray-500">${formatDate(l.registeredAt)}</td>
+          <td class="px-6 py-4 text-xs text-gray-500">${formatDate(l.updatedAt)}</td>
+        `;
+        leadsTable.appendChild(tr);
+      });
+    }
+
+    function showDashboard() {
+      loginScreen.classList.add('hidden');
+      dashboard.classList.remove('hidden');
+    }
+
+    function showError(msg) {
+      loginError.textContent = msg;
+      loginError.classList.remove('hidden');
+      setTimeout(() => loginError.classList.add('hidden'), 3000);
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function formatDate(dateStr) {
+      if (!dateStr) return '-';
+      try {
+        const d = new Date(dateStr);
+        return d.toLocaleString('es-ES');
+      } catch {
+        return dateStr;
+      }
+    }
+  </script>
+</body>
+
+</html>
