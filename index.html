@@ -286,49 +286,51 @@
       </div>
     </div>
 
-    <!-- FORMULARIO DE ACCESO ANTICIPADO CON SELECTOR DE ROL -->
+    <!-- SECCIÓN DE DESCARGA DIRECTA APK -->
     <div id="registro"
-      class="max-w-xl mx-auto mb-16 glass-panel rounded-2xl p-6 sm:p-8 border border-emerald-800/40 relative">
-      <div class="text-left mb-5">
-        <h3 class="text-lg font-bold text-white flex items-center gap-2">
-          <i class="fa-solid fa-paper-plane text-emerald-400"></i> Registra tu interés y recibe el enlace directo del
-          APK
+      class="max-w-xl mx-auto mb-16 glass-panel rounded-2xl p-6 sm:p-8 border border-emerald-800/40 relative text-center">
+      <div class="mb-5">
+        <h3 class="text-lg font-bold text-white flex items-center justify-center gap-2">
+          <i class="fa-solid fa-download text-emerald-400"></i> Descarga Scout Wiki Oficial (APK)
         </h3>
-        <p class="text-xs text-gray-400">Descarga directa sin costo para scouts, guiadoras, dirigentes y grupos scout.
+        <p class="text-xs text-gray-400 mt-1">
+          Aplicación 100% offline para Android. Sin anuncios, sin registros previos y completamente libre.
         </p>
       </div>
 
-      <form id="leadForm" class="flex flex-col gap-3" onsubmit="handleFormSubmit(event)">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          <div>
-            <input id="emailInput" type="email" placeholder="Tu correo electrónico" required
-              class="w-full bg-[#08100a] border border-[#213b24] text-white px-4 py-3 rounded-xl focus:outline-none focus:border-emerald-400 text-sm placeholder:text-gray-500 transition-colors" />
-          </div>
-          <div>
-            <input id="phoneInput" type="tel" placeholder="Tu número de teléfono" required pattern="[0-9+\-\s]{7,20}"
-              class="w-full bg-[#08100a] border border-[#213b24] text-white px-4 py-3 rounded-xl focus:outline-none focus:border-emerald-400 text-sm placeholder:text-gray-500 transition-colors" />
-          </div>
-        </div>
-        <div>
-          <select id="roleSelect"
-            class="w-full bg-[#08100a] border border-[#213b24] text-emerald-300 px-3 py-3 rounded-xl focus:outline-none focus:border-emerald-400 text-sm transition-colors">
-            <option value="" disabled>Selecciona tu rol en el movimiento</option>
-            <option value="Dirigente / Scouter" selected>Dirigente / Jefe</option>
-            <option value="Rover (18-21)">Rover</option>
-            <option value="Caminante (15-18)">Caminante</option>
-            <option value="Tropa Scout (11-15)">Scout / Tropa</option>
-            <option value="Padre / Tutor">Padre / Tutor</option>
-          </select>
-        </div>
+      <!-- Botón de Descarga Directa -->
+      <a href="ruta/de/tu/archivo/scout-wiki.apk" download
+        class="w-full bg-gradient-to-r from-emerald-600 via-emerald-500 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-bold px-6 py-4 rounded-xl text-sm sm:text-base transition-all border border-emerald-400/40 shadow-lg shadow-emerald-900/40 flex items-center justify-center gap-3 group">
+        <i class="fa-solid fa-mobile-screen-button text-lg"></i>
+        <span>Descargar APK (Versión Beta)</span>
+        <i class="fa-solid fa-arrow-down group-hover:translate-y-0.5 transition-transform"></i>
+      </a>
 
-        <button id="submitBtn" type="submit"
-          class="w-full bg-gradient-to-r from-emerald-600 via-emerald-500 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-bold px-6 py-3.5 rounded-xl text-sm transition-all border border-emerald-400/40 shadow-lg shadow-emerald-900/30 flex items-center justify-center gap-2 group">
-          <span id="submitBtnText">Notificarme en el Lanzamiento Oficial</span>
-          <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
-        </button>
-      </form>
-      <span class="text-[11px] text-gray-500 block mt-3 text-center">Garantía de privacidad Scout: Cero spam, 100% libre
-        de anuncios comerciales.</span>
+      <span class="text-[11px] text-gray-500 block mt-4">
+        Compatible con Android 8.0 o superior • Peso ligero (&lt; 15 MB)
+      </span>
+    </div>
+    <!-- INSTRUCCIONES DE INSTALACIÓN ANDROID -->
+    <div class="max-w-3xl mx-auto mb-16 glass-panel rounded-2xl p-6 sm:p-8 border border-emerald-800/40 text-left">
+      <h3 class="text-base font-bold text-white flex items-center gap-2 mb-4">
+        <i class="fa-solid fa-circle-info text-emerald-400"></i> ¿Cómo instalar el APK en tu celular?
+      </h3>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-gray-300">
+        <div class="bg-[#08100a] border border-[#213b24] p-4 rounded-xl">
+          <span class="text-emerald-400 font-bold block mb-1">Paso 1</span>
+          Haz clic en el botón de descarga y espera a que el archivo <strong>.apk</strong> se guarde en tu dispositivo.
+        </div>
+        <div class="bg-[#08100a] border border-[#213b24] p-4 rounded-xl">
+          <span class="text-emerald-400 font-bold block mb-1">Paso 2</span>
+          Abre el archivo descargado. Si tu teléfono lo requiere, autoriza la instalación desde <strong>Fuentes
+            Desconocidas</strong>.
+        </div>
+        <div class="bg-[#08100a] border border-[#213b24] p-4 rounded-xl">
+          <span class="text-emerald-400 font-bold block mb-1">Paso 3</span>
+          Pulsa en "Instalar" y listo. Ya podrás usar Scout Wiki sin necesidad de internet en tus campamentos.
+        </div>
+      </div>
     </div>
 
     <!-- MOCKUP PROTAGONISTA DE LA APP CON HIGHLIGHTS FLOTANTES -->
@@ -378,7 +380,7 @@
       <div
         class="relative mx-auto max-w-[340px] sm:max-w-[400px] rounded-[48px] p-4 bg-gradient-to-b from-[#18361d] via-[#09150b] to-black border-4 border-[#254d2c] shadow-[0_0_80px_rgba(16,185,129,0.25)]">
         <div class="overflow-hidden rounded-[36px] border border-emerald-900/60 shadow-2xl relative bg-black">
-          <img src="img/scout_wiki_app_mockup.jpg" onerror="this.onerror=null; this.src='scout_wiki_app_mockup.jpg';"
+          <img src="img/preview1.svg" onerror="this.onerror=null; this.src='img/preview1.svg';"
             alt="Scout Wiki App Interfaz Nativa Android"
             class="w-full h-auto object-cover transform hover:scale-[1.02] transition-transform duration-500" />
         </div>
@@ -806,9 +808,7 @@
             </div>
           </div>
         </div>
-
       </div>
-
     </div>
   </section>
 
@@ -857,19 +857,6 @@
         <h3 class="text-lg font-bold text-white mb-2">Tropa Scout</h3>
         <p class="text-xs text-gray-300 leading-relaxed">
           Sistema de Patrullas, nudos de campismo, construcciones, señales de pista, fuego y código de la Ley Scout.
-        </p>
-      </div>
-
-      <!-- CAMINANTES -->
-      <div class="glass-panel rounded-2xl p-5 border-sky-700/40 hover:border-sky-500/60 transition-all text-left group">
-        <div
-          class="w-10 h-10 rounded-xl bg-sky-950/60 border border-sky-600/50 text-sky-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
-          <i class="fa-solid fa-mountain font-extrabold"></i>
-        </div>
-        <span class="text-[10px] uppercase font-extrabold tracking-widest text-sky-400 block mb-1">15 a 18 Años</span>
-        <h3 class="text-lg font-bold text-white mb-2">Caminantes</h3>
-        <p class="text-xs text-gray-300 leading-relaxed">
-          Expediciones de montaña, orientación avanzada por estrellas y azimut, liderazgo y proyectos de desafío.
         </p>
       </div>
 
@@ -1074,6 +1061,186 @@
     </div>
   </section>
 
+  <!-- SECCIÓN DE CRÉDITOS DEL DESARROLLADOR -->
+  <section id="desarrollador" class="border-t border-[#1b2f1f] bg-black py-20 relative z-10">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+
+      <!-- Encabezado de la Sección -->
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span
+          class="text-xs font-bold uppercase tracking-widest text-emerald-400 bg-[#102213] border border-[#234727] px-3.5 py-1.5 rounded-full inline-block mb-3">
+          Desarrollo & Liderazgo Técnico
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-display font-extrabold text-white">
+          Detrás de Scout Wiki
+        </h2>
+        <p class="text-gray-400 text-sm mt-2">
+          Un proyecto concebido, diseñado e implementado con pasión por la técnica scout y la tecnología nativa.
+        </p>
+      </div>
+
+      <!-- Tarjeta Principal del Desarrollador -->
+      <div class="glass-panel rounded-3xl p-6 sm:p-10 border border-emerald-800/40 relative overflow-hidden shadow-2xl">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+
+          <!-- Columna Izquierda: Foto de Perfil & Insignia/Logo del Grupo Scout -->
+          <div class="lg:col-span-5 flex flex-col items-center text-center">
+            <div class="relative mb-4">
+              <!-- Contenedor Foto de Perfil con Anillo Resplandeciente -->
+              <div
+                class="w-36 h-36 sm:w-44 sm:h-44 rounded-2xl overflow-hidden border-2 border-emerald-400/60 shadow-[0_0_30px_rgba(16,185,129,0.25)] bg-[#08100a]">
+                <img src="img/miguelbeer.jpg"
+                  onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Miguel+Beer&background=059669&color=fff&size=200';"
+                  alt="Foto de Perfil del Desarrollador" class="w-full h-full object-cover" />
+              </div>
+
+              <!-- Logo / Insignia del Grupo Scout (Superpuesto en la esquina inferior derecha) -->
+              <div
+                class="absolute -bottom-3 -right-3 w-14 h-14 rounded-xl bg-[#09150b] border-2 border-emerald-500/80 p-1 shadow-lg flex items-center justify-center"
+                title="Logo del Grupo Scout">
+                <img src="img/Logogp2.png" onerror="this.onerror=null; this.src='img/Logoapps.png';"
+                  alt="Logo Grupo Scout" class="w-full h-full object-contain rounded-lg" />
+              </div>
+            </div>
+
+            <!-- Nombre y Rol -->
+            <h3 class="text-2xl font-display font-extrabold text-white tracking-wide mt-2">
+              Miguel Beer
+            </h3>
+            <p class="text-xs text-emerald-400 font-semibold uppercase tracking-wider mt-1">
+              Desarrollador Full Stak & Scout
+            </p>
+            <span class="text-[11px] text-gray-400 mt-0.5">
+              Grupo 2 Cheb Ik Mwuan
+            </span>
+          </div>
+
+          <!-- Columna Derecha: Párrafo Biográfico & Contacto para Soporte -->
+          <div class="lg:col-span-7 flex flex-col justify-between space-y-6">
+
+            <!-- Párrafo Sobre el Desarrollador -->
+            <div>
+              <h4 class="text-sm font-bold text-gray-300 uppercase tracking-wider mb-2 flex items-center gap-2">
+                <i class="fa-solid fa-code text-emerald-400"></i> Sobre el Creador
+              </h4>
+              <p class="text-sm text-[#a3bfa7] leading-relaxed font-normal">
+                Estudiante de Ing. en sistemas y scout desde los 5 años, pertenezco al Grupo 2 palenque perteneciente a
+                la asociacion de scouts independientes
+                cuento con un amplio conocimiento de el mundo scout y la tecnologia, me gusta desarrollar software que
+                pueda ayudar a los scouts a
+                mejorar su experiencia en el movimiento scout.
+              </p>
+            </div>
+
+            <!-- Canales de Contacto / Soporte Técnico -->
+            <div class="border-t border-[#1b2f1f] pt-5">
+              <h4 class="text-xs font-bold text-emerald-400 uppercase tracking-widest mb-3">
+                Soporte Técnico & Contacto Directo
+              </h4>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                <!-- Correo -->
+                <a href="mailto:scoutwikicontacto@gmail.com"
+                  class="flex items-center gap-3 p-3 rounded-xl bg-[#08100a] border border-[#213b24] hover:border-emerald-400/60 text-gray-300 hover:text-white transition-colors">
+                  <div
+                    class="w-8 h-8 rounded-lg bg-emerald-950/80 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-sm">
+                    <i class="fa-solid fa-envelope"></i>
+                  </div>
+                  <div class="truncate">
+                    <span class="block text-[10px] text-gray-500 uppercase font-semibold">Correo de Soporte</span>
+                    <span class="font-medium truncate block">scoutwikicontacto@gmail.com</span>
+                  </div>
+                </a>
+
+                <!-- Teléfono / WhatsApp -->
+                <a href="tel:+529213114056"
+                  class="flex items-center gap-3 p-3 rounded-xl bg-[#08100a] border border-[#213b24] hover:border-emerald-400/60 text-gray-300 hover:text-white transition-colors">
+                  <div
+                    class="w-8 h-8 rounded-lg bg-emerald-950/80 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-sm">
+                    <i class="fa-solid fa-phone"></i>
+                  </div>
+                  <div>
+                    <span class="block text-[10px] text-gray-500 uppercase font-semibold">Teléfono / WhatsApp</span>
+                    <span class="font-medium block">+52 9213114056</span>
+                  </div>
+                  <!-- Botón Portafolio para el Header (Escritorio y Móvil) -->
+                  <a href="https://miguelbeer.vercel.app" target="_blank" rel="noopener noreferrer"
+                    class="hidden sm:flex items-center gap-2 bg-[#0e1c10] hover:bg-[#142e18] text-emerald-400 hover:text-emerald-300 font-semibold px-4 py-2 rounded-xl text-xs sm:text-sm transition-all duration-300 border border-[#214324] hover:border-emerald-500/50 shadow-inner">
+                    <i class="fa-solid fa-briefcase text-xs"></i>
+                    <span>Mi Portafolio</span>
+                  </a>
+
+                </a>
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <!-- SECCIÓN DE DONACIONES / APOYO AL DESARROLLADOR -->
+  <section id="donaciones" class="border-t border-[#1b2f1f] bg-[#070d08] py-20 relative z-10">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+
+      <!-- Encabezado de la Sección -->
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span
+          class="text-xs font-bold uppercase tracking-widest text-emerald-400 bg-[#102213] border border-[#234727] px-3.5 py-1.5 rounded-full inline-block mb-3">
+          Apoya el Proyecto
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-display font-extrabold text-white">
+          Mantén vivo Scout Wiki
+        </h2>
+        <p class="text-gray-400 text-sm mt-2">
+          Scout Wiki es un desarrollo 100% libre de anuncios y sin fines de lucro. Si la herramienta te ha sido útil en
+          tus campamentos, puedes colaborar con una donación voluntaria.
+        </p>
+      </div>
+
+      <!-- Tarjeta Principal de Donación -->
+      <div
+        class="glass-panel rounded-3xl p-6 sm:p-10 border border-emerald-800/40 relative overflow-hidden shadow-2xl text-center">
+
+        <!-- Icono superior decorativo -->
+        <div
+          class="w-14 h-14 mx-auto rounded-2xl bg-emerald-950/80 border border-emerald-500/40 flex items-center justify-center text-emerald-400 text-2xl mb-6 shadow-lg">
+          <i class="fa-solid fa-mug-hot"></i>
+        </div>
+
+        <h3 class="text-xl font-display font-bold text-white mb-3">
+          Invítame un café o apoya el mantenimiento del servidor
+        </h3>
+        <p class="text-sm text-[#a3bfa7] max-w-xl mx-auto mb-8 leading-relaxed">
+          Cada aporte va directamente destinado a cubrir costos de compilación, optimización y actualización continua de
+          las herramientas offline. ¡Se agradece de corazón hermano scout!
+        </p>
+
+        <!-- Botón de PayPal (Reemplaza el enlace por tu link de PayPal.me o botón de donación) -->
+        <div class="flex flex-col items-center justify-center gap-4">
+          <a href="https://paypal.me/tu-usuario-paypal" target="_blank" rel="noopener noreferrer"
+            class="w-full sm:w-auto min-w-[260px] bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold px-8 py-4 rounded-xl text-sm transition-all duration-300 shadow-lg shadow-blue-900/30 border border-blue-400/40 flex items-center justify-center gap-3 group">
+            <i class="fa-brands fa-paypal text-xl"></i>
+            <span>Donar con PayPal</span>
+            <i
+              class="fa-solid fa-arrow-up-right-from-square text-xs group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+          </a>
+
+          <span class="text-[11px] text-gray-500 flex items-center gap-1.5 mt-2">
+            <i class="fa-solid fa-shield-halved text-emerald-500"></i> Transacción 100% segura a través de PayPal
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+
   <!-- FOOTER -->
   <footer class="border-t border-[#172b1b] py-12 text-center text-xs text-gray-500 bg-black relative z-10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-6">
@@ -1087,14 +1254,16 @@
       </div>
 
       <div class="text-gray-400 text-[11px]">
-        Siempre Listos • Servir con Honor • 100% Offline-First
+        Desarolado por Miguel Beer
       </div>
 
       <div class="text-gray-500 text-[11px]">
-        © 2026 Scout Wiki. Desarrollado para la Hermandad Scout Mundial.
+        © 2026 Scout Wiki. Desarrollado Por Miguel Beer.
       </div>
 
     </div>
+
+
   </footer>
 
   <!-- MODAL DE CONFIRMACIÓN DE REGISTRO -->
@@ -1216,59 +1385,6 @@
         alert("Por favor completa todos los campos (correo, teléfono y rol).");
         return;
       }
-
-      // Validar formato de email
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        alert("Por favor ingresa un correo electrónico válido.");
-        return;
-      }
-
-      // Mostrar estado de carga
-      const submitBtn = document.getElementById("submitBtn");
-      const submitBtnText = document.getElementById("submitBtnText");
-      if (submitBtn) submitBtn.disabled = true;
-      if (submitBtnText) submitBtnText.innerText = "Registrando...";
-
-      try {
-        const response = await fetch('/api/leads', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, phone, role })
-        });
-
-        const result = await response.json();
-
-        if (result.success) {
-          document.getElementById("modalMsg").innerText = `¡Listo! Registramos tu cuenta (${email}) con teléfono (${phone}) y rol "${role}". Te notificaremos inmediatamente cuando liberemos la descarga del APK oficial.`;
-          document.getElementById("successModal").classList.remove("hidden");
-          document.getElementById("leadForm").reset();
-        } else {
-          alert('Error: ' + (result.error || 'No se pudo registrar. Intenta de nuevo.'));
-        }
-      } catch (err) {
-        // Fallback offline (se guarda en localStorage para no perder el lead)
-        const leads = JSON.parse(localStorage.getItem('scoutWikiLeads') || '[]');
-        const existingIdx = leads.findIndex(l => l.email === email);
-        if (existingIdx !== -1) {
-          leads[existingIdx] = { email, phone, role, updatedAt: new Date().toISOString() };
-        } else {
-          leads.push({ id: leads.length + 1, email, phone, role, registeredAt: new Date().toISOString() });
-        }
-        localStorage.setItem('scoutWikiLeads', JSON.stringify(leads));
-
-        document.getElementById("modalMsg").innerText = `¡Listo! Registramos tu cuenta (${email}) con teléfono (${phone}) y rol "${role}". (Modo Offline activo: guardado en dispositivo local). Te notificaremos cuando liberemos el APK.`;
-        document.getElementById("successModal").classList.remove("hidden");
-        document.getElementById("leadForm").reset();
-      } finally {
-        if (submitBtn) submitBtn.disabled = false;
-        if (submitBtnText) submitBtnText.innerText = "Notificarme en el Lanzamiento Oficial";
-      }
-    }
-
-    function closeModal() {
-      const modal = document.getElementById("successModal");
-      if (modal) modal.classList.add("hidden");
     }
 
     // 3. INTERACTIVE TABS EN SIMULADOR
